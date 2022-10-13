@@ -7,32 +7,21 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class DateTimeSender extends UnicastRemoteObject implements IDateTime {
     private Date date;
-    private RMIServer launcher;
+    private final RMIServer launcher;
     DateTimeSender(RMIServer s) throws RemoteException {
         super();
         launcher=s;
-
     }
 
-
     public void setCloseServer(boolean closeServer) throws RemoteException, NotBoundException {
-        this.closeServer = closeServer;
         if(closeServer){
             launcher.close();
         }
     }
 
-    private boolean closeServer;
-
-    public DateTimeSender() throws RemoteException {
-
-        date=new Date();
-        closeServer=false;
-    }
-            @Override
+    @Override
     public String getDate() throws RemoteException {
         date=new Date();
         DateFormat dateFormat=new SimpleDateFormat("dd.MM.yyyy");
@@ -55,6 +44,4 @@ public class DateTimeSender extends UnicastRemoteObject implements IDateTime {
 
         return true;
     }
-
-
 }

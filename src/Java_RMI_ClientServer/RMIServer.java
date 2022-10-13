@@ -9,14 +9,11 @@ import java.rmi.server.UnicastRemoteObject;
 
 
 public class RMIServer {
-
     Registry registry;
     String objectName="dateTimeSender";
     DateTimeSender dtSender;
     static public void main(String[]args){
-
             new RMIServer().run();
-
     }
     void close() throws RemoteException, NotBoundException {
         registry.unbind(objectName);
@@ -25,18 +22,13 @@ public class RMIServer {
     }
     private void run(){
         try {
-
             dtSender=new DateTimeSender(this);
             registry= LocateRegistry.createRegistry(1099);
             registry.bind(objectName, dtSender);
             System.out.println("Server started");
-
-
-        } catch (RemoteException | AlreadyBoundException e) {
+        }
+        catch (RemoteException | AlreadyBoundException e) {
             e.printStackTrace();
         }
-
-
-
     }
 }

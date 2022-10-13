@@ -6,13 +6,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 public class RMIClient {
-
-    private IDateTime IDateTimeSender;
-    private Registry registry;
+    private final IDateTime IDateTimeSender;
 
     public RMIClient() throws RemoteException, NotBoundException {
 
-        registry= LocateRegistry.getRegistry(1099);
+        Registry registry = LocateRegistry.getRegistry(1099);
         IDateTimeSender = (IDateTime) registry.lookup("dateTimeSender");
     }
 
@@ -26,7 +24,6 @@ public class RMIClient {
         IDateTimeSender.stop();
     }
 
-
     static public void main(String[]args){
         try {
             RMIClient client=new RMIClient();
@@ -34,8 +31,8 @@ public class RMIClient {
             client.getTime();
             client.stopServer();
         }
-        catch (RemoteException|NotBoundException e){e.getMessage();}
-
+        catch (RemoteException|NotBoundException e){
+            e.getMessage();
+        }
     }
-
 }
